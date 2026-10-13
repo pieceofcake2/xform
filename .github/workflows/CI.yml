@@ -12,6 +12,10 @@ permissions:
   contents: read
   id-token: write
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   phpunit:
     runs-on: ubuntu-latest
@@ -27,7 +31,7 @@ jobs:
           - '8.4'
           - '8.5'
         db-type:
-          - mysql
+          - sqlite
 
     env:
       DB: ${{ matrix.db-type }}
@@ -35,48 +39,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-
-      - name: Start MySQL 5.6
-        if: matrix.db-type == 'mysql'
-        run: |
-          docker run -d --name mysql56 \
-            -e MYSQL_ROOT_PASSWORD=root \
-            -e MYSQL_DATABASE=cakephp_test \
-            -p 3306:3306 \
-            -v ${{ github.workspace }}/docker/mysql:/docker-entrypoint-initdb.d:ro \
-            --health-cmd="mysqladmin ping" \
-            --health-interval=10s \
-            --health-timeout=5s \
-            --health-retries=3 \
-            mysql:5.6
-
-      - name: Start MySQL 8.0
-        if: matrix.db-type == 'mysql80'
-        run: |
-          docker run -d --name mysql80 \
-            -e MYSQL_ROOT_PASSWORD=root \
-            -e MYSQL_DATABASE=cakephp_test \
-            -p 3307:3306 \
-            -v ${{ github.workspace }}/docker/mysql:/docker-entrypoint-initdb.d:ro \
-            --health-cmd="mysqladmin ping" \
-            --health-interval=10s \
-            --health-timeout=5s \
-            --health-retries=3 \
-            mysql:8.0
-
-      - name: Start PostgreSQL 9.4
-        if: matrix.db-type == 'pgsql'
-        run: |
-          docker run -d --name postgres94 \
-            -e POSTGRES_PASSWORD=postgres \
-            -e POSTGRES_DB=cakephp_test \
-            -p 5432:5432 \
-            -v ${{ github.workspace }}/docker/pgsql:/docker-entrypoint-initdb.d:ro \
-            --health-cmd="pg_isready" \
-            --health-interval=10s \
-            --health-timeout=5s \
-            --health-retries=5 \
-            postgres:9.4
 
       - name: Install PHP with extensions
         uses: shivammathur/setup-php@v2
@@ -146,18 +108,6 @@ jobs:
           format: clover
           incomplete: true
           name: PHP ${{ matrix.php-version }} - ${{ matrix.db-type }}
-
-      - name: Stop MySQL 5.6
-        if: always() && matrix.db-type == 'mysql'
-        run: docker stop mysql56 && docker rm mysql56 || true
-
-      - name: Stop MySQL 8.0
-        if: always() && matrix.db-type == 'mysql80'
-        run: docker stop mysql80 && docker rm mysql80 || true
-
-      - name: Stop PostgreSQL 9.4
-        if: always() && matrix.db-type == 'pgsql'
-        run: docker stop postgres94 && docker rm postgres94 || true
 
   qlty:
     runs-on: ubuntu-latest
