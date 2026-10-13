@@ -263,9 +263,7 @@ class XformHelper extends FormHelper
             return $this->getConfirmInput($fieldName);
         }
 
-        $args = func_get_args();
-
-        return $this->__xformCallParent([$this, 'parent::textarea'], $args);
+        return parent::textarea(...func_get_args());
     }
 
     /**
@@ -279,9 +277,8 @@ class XformHelper extends FormHelper
         if ($this->checkConfirmScreen()) {
             return $this->getConfirmInput($fieldName, $options);
         }
-        $args = func_get_args();
 
-        return $this->__xformCallParent([$this, 'parent::radio'], $args);
+        return parent::radio(...func_get_args());
     }
 
     /**
@@ -295,9 +292,8 @@ class XformHelper extends FormHelper
         if ($this->checkConfirmScreen()) {
             return $this->getConfirmInput($fieldName, $options);
         }
-        $args = func_get_args();
 
-        return $this->__xformCallParent([$this, 'parent::select'], $args);
+        return parent::select(...func_get_args());
     }
 
     /**
@@ -310,9 +306,8 @@ class XformHelper extends FormHelper
         if ($this->checkConfirmScreen()) {
             return $this->getConfirmInput($fieldName);
         }
-        $args = func_get_args();
 
-        return $this->__xformCallParent([$this, 'parent::checkbox'], $args);
+        return parent::checkbox(...func_get_args());
     }
 
     /**
@@ -360,7 +355,7 @@ class XformHelper extends FormHelper
      */
     protected function _getFieldData($fieldName, $options = null)
     {
-        $modelname = key($this->request->params['models']);
+        $modelname = !empty($this->request->params['models']) ? key($this->request->params['models']) : null;
 
         // for Model.field or Model.N.field pattern
         $model_field = explode('.', $fieldName);
@@ -380,8 +375,10 @@ class XformHelper extends FormHelper
         } else {
             if (empty($modelname)) {
                 $data = current($this->request->data);
-            } else {
+            } elseif (isset($this->request->data[$modelname])) {
                 $data = $this->request->data[$modelname];
+            } else {
+                $data = [];
             }
         }
 
@@ -438,7 +435,7 @@ class XformHelper extends FormHelper
                     return '';
                 }
 
-                $separator = !empty($options[4]['separator']) ? $options[4]['separator'] : '-';
+                $separator = !empty($options[3]['separator']) ? $options[3]['separator'] : '-';
                 $datefmt = [
                     'year' => $separator,
                     'month' => $separator,
@@ -476,21 +473,5 @@ class XformHelper extends FormHelper
         }
 
         return '';
-    }
-
-    /**
-     * call call_user_func_array with different arguments.
-     *
-     * @param array|string $call
-     * @param array $args
-     * @return mixed
-     */
-    private function __xformCallParent($call, $args)
-    {
-        if (is_array($call)) {
-            $call = $call[1];
-        }
-
-        return call_user_func_array($call, $args);
     }
 }
