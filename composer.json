@@ -1,6 +1,6 @@
 {
     "name": "pieceofcake2/xform",
-    "description": "Xform (Plugin) extends cakephp Form helper.",
+    "description": "FormHelper extension for CakePHP 2 that shows the submitted values on confirmation screens",
     "type": "cakephp-plugin",
     "keywords": ["cakephp", "cakephp2", "form"],
     "license": "MIT",
