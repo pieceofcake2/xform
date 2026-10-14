@@ -8,9 +8,14 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/pieceofcake2/xform/CI.yml?label=CI)](https://github.com/pieceofcake2/xform/actions/workflows/CI.yml)
 [![Codecov](https://img.shields.io/codecov/c/gh/pieceofcake2/xform?label=Coverage)](https://codecov.io/gh/pieceofcake2/xform)
 
-__This is forked for CakePHP2.__
+pieceofcake2/xform extends CakePHP's `FormHelper` for input → confirmation → complete form
+flows: on the confirmation screen, the same view code outputs the submitted values as text
+instead of form controls. Originally developed by Yasushi Ichikawa.
 
-Extends cakephp Form helper.
+## Requirements
+
+* PHP 8.0+
+* pieceofcake2/cakephp 2.12+
 
 ## Installation
 
@@ -18,32 +23,17 @@ Extends cakephp Form helper.
 composer require pieceofcake2/xform
 ```
 
-## Config
+Then load the plugin and add the `Xform.Xform` helper to your controller.
+See [Installation](docs/README.md#installation) and [Usage](docs/README.md#usage).
 
-* load plugin in bootstrap
-  `CakePlugin::load('Xform');`
-* Include the helper in your `controller.php`:
-  `var $helpers = array('Form', 'Xform.Xform');`
-* call method of XformHelper in your view.
-  `echo $this->Xform->input('title');`
+## Documentation
 
-## Usage
+Documentation: https://pieceofcake2.github.io/xform/
 
-On confirmation screen, this helper just show value of post data
-  instead of making form tags.
+## Contributing
 
-On form input screen, this helper behaves same as form helper.
+See the [contribution guidelines](https://github.com/pieceofcake2/.github/blob/master/CONTRIBUTING.md).
 
-How does this helper know on confirmation screen?
-When the confirmation transition, do following 1 or 2.
+## License
 
-1. in controller
-   `$this->params['xformHelperConfirmFlag'] = true;`
-2. in controller or view file
-   `$this->XformHelper->confirmScreenFlag = true;`
-
-If you want to mask a password field on confirmation screen,
-  use password method instead of input method.
-
-If you want to change separator of datetime,
-  set separator value on the changeDatetimeSeparator property.
+MIT License. See [LICENSE](LICENSE).
