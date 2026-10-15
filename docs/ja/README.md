@@ -91,7 +91,7 @@ echo $this->Xform->end('Submit');
    ```
 
 入力画面では、`password()` は送信されたパスワードを入力欄に埋めません (後述の
-`notFillinPasswordValue` を参照してください)。
+`notFillinPasswordValue` をご覧ください)。
 
 <a id="options"></a>
 
