@@ -75,7 +75,7 @@ echo $this->Xform->end('Submit');
 
 現在の画面が確認画面であることは、次の 2 つのどちらかの方法でヘルパーに伝えます。
 
-1. コントローラーで、リクエストパラメーター `xformHelperConfirmFlag` を設定します。
+1. コントローラーで、リクエストパラメータ `xformHelperConfirmFlag` を設定します。
 
    ```php
    public function confirm()
