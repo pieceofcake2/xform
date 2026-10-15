@@ -19,7 +19,7 @@ instead of form controls. Originally developed by Yasushi Ichikawa.
 
 ## Installation
 
-```
+```bash
 composer require pieceofcake2/xform
 ```
 
