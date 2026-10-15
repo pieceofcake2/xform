@@ -151,3 +151,11 @@ $this->Xform->changeDatetimeSeparator = [
 ```php
 public $helpers = ['Form', 'Xform.Xformjp'];
 ```
+
+## Origin
+
+This package is a maintained fork of
+[ichikaway/xformHelper](https://github.com/ichikaway/xformHelper) (`ichikaway/xform` on Packagist,
+last upstream version 2.0.0), originally by Yasushi Ichikawa. It is maintained for CakePHP 2 on
+modern PHP by [pieceofcake2](https://github.com/pieceofcake2). Changes from the original are listed
+in the [commit history since the fork](https://github.com/pieceofcake2/xform/compare/ab13a90...2.x).

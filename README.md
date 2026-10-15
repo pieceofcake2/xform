@@ -37,6 +37,14 @@ See [Installation](docs/README.md#installation) and [Usage](docs/README.md#usage
 
 See the [contribution guidelines](https://github.com/pieceofcake2/.github/blob/master/CONTRIBUTING.md).
 
+## Origin
+
+This package is a maintained fork of
+[ichikaway/xformHelper](https://github.com/ichikaway/xformHelper) (`ichikaway/xform` on Packagist,
+last upstream version 2.0.0), originally by Yasushi Ichikawa. It is maintained for CakePHP 2 on
+modern PHP by [pieceofcake2](https://github.com/pieceofcake2). Changes from the original are listed
+in the [commit history since the fork](https://github.com/pieceofcake2/xform/compare/ab13a90...2.x).
+
 ## License
 
 MIT License. See [LICENSE](LICENSE).
