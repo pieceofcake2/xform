@@ -26,8 +26,8 @@ composer require pieceofcake2/xform
 
 | レイアウト | `installer-paths` |
 | --- | --- |
-| モダン (`config/`, `src/`, `templates/`, `plugins/`) | `"plugins/{$name}/": ["type:cakephp-plugin"]` |
-| レガシー (`app/Config/`, `app/Plugin/`) | `"app/Plugin/{$name}/": ["type:cakephp-plugin"]` |
+| モダン (`config/`、`src/`、`templates/`、`plugins/`) | `"plugins/{$name}/": ["type:cakephp-plugin"]` |
+| レガシー (`app/Config/`、`app/Plugin/`) | `"app/Plugin/{$name}/": ["type:cakephp-plugin"]` |
 
 `config/bootstrap.php` (レガシーレイアウトでは `app/Config/bootstrap.php`) でプラグインを読み込みます。
 すでに `CakePlugin::loadAll()` を使っている場合は不要です。
@@ -97,7 +97,7 @@ echo $this->Xform->end('Submit');
 
 ## オプション
 
-ヘルパーのオプションは public プロパティです。ヘルパーの設定で指定するか、
+ヘルパーのオプションは public プロパティです。ヘルパーの設定で指定します。
 
 ```php
 public $helpers = [
@@ -109,7 +109,7 @@ public $helpers = [
 ];
 ```
 
-ビューで設定します。
+または、ビューで設定します。
 
 ```php
 $this->Xform->doNl2br = false;
