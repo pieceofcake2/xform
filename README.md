@@ -12,6 +12,13 @@ pieceofcake2/xform extends CakePHP's `FormHelper` for input → confirmation →
 flows: on the confirmation screen, the same view code outputs the submitted values as text
 instead of form controls. Originally developed by Yasushi Ichikawa.
 
+## Documentation
+
+- Website: https://pieceofcake2.github.io/xform/
+- Markdown: [docs/README.md](docs/README.md) (for AI tools and offline reading)
+
+The Markdown documentation is also included in the Composer package, in the plugin's directory: `plugins/Xform/docs/README.md` (the location depends on your `installer-paths`). Install the package with `--dev` if you only need it for development.
+
 ## Requirements
 
 * PHP 8.0+
@@ -25,10 +32,6 @@ composer require pieceofcake2/xform
 
 Then load the plugin and add the `Xform.Xform` helper to your controller.
 See [Installation](docs/README.md#installation) and [Usage](docs/README.md#usage).
-
-## Documentation
-
-Documentation: https://pieceofcake2.github.io/xform/
 
 ## Contributing
 
